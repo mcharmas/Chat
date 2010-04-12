@@ -40,11 +40,13 @@ public class Client extends Thread {
                 Logger.getLogger(Client.class.getName()).log(Level.INFO, "Got message.");
                 if(m.startsWith("{") && m.endsWith("}")) { //user is logging in
                     this.username = m.substring(1, m.length()-1);
+                    Logger.getLogger(Client.class.getName()).log(Level.INFO, "Logged in as: "+this.username);
+                } else {
+                    Message msg = new Message(username, m);
+                    System.out.println(username + " " + m);
+                    this.sendMessage(msg);
+                    //TODO send msg dalej
                 }
-
-                Message msg = new Message(username, m);
-                System.out.println(username + " " + m);
-                //TODO send msg dalej
             }
             Logger.getLogger(Client.class.getName()).log(Level.INFO, "Client disconnected.");
             this.clientSocket.close();
@@ -57,6 +59,8 @@ public class Client extends Thread {
     public void sendMessage(Message m) {
         try {
             writer.write(m.getFrom() + ": " + m.getContent());
+            writer.newLine();
+            writer.flush();
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error sending message to:" + this.username, ex);
         }
