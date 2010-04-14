@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -21,35 +23,29 @@ import java.util.logging.Logger;
 public class Client extends Thread {
 
     private Socket clientSocket=null;
-    private BufferedReader reader=null;
-    private BufferedWriter writer=null;
     private String username;
+    private ObjectInputStream inObjStr=null;
+    private ObjectOutputStream outObjStr=null;
 
     public Client(Socket client) throws IOException {
         this.clientSocket = client;
-        reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        writer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+        inObjStr = new ObjectInputStream(clientSocket.getInputStream());
+        outObjStr = new ObjectOutputStream(clientSocket.getOutputStream());
         Logger.getLogger(Client.class.getName()).log(Level.INFO, "Client created.");
     }
 
     @Override
     public void run() {
         try {
-            String m = "";
-            while ((m = reader.readLine()) != null) {
+            Msg m = null;
+            while ((m = (Msg)inObjStr.readObject())!=null) {
                 Logger.getLogger(Client.class.getName()).log(Level.INFO, "Got message.");
-                if(m.startsWith("{") && m.endsWith("}")) { //user is logging in
-                    this.username = m.substring(1, m.length()-1);
-                    Logger.getLogger(Client.class.getName()).log(Level.INFO, "Logged in as: "+this.username);
-                } else {
-                    Message msg = new Message(username, m);
-                    System.out.println(username + " " + m);
-                    this.sendMessage(msg);
-                    //TODO send msg dalej
-                }
+                
             }
             Logger.getLogger(Client.class.getName()).log(Level.INFO, "Client disconnected.");
             this.clientSocket.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Client data read error.", ex);
         }
@@ -57,16 +53,5 @@ public class Client extends Thread {
     }
 
     public void sendMessage(Message m) {
-        try {
-            writer.write(m.getFrom() + ": " + m.getContent());
-            writer.newLine();
-            writer.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error sending message to:" + this.username, ex);
-        }
     }
-
-
-
-
 }

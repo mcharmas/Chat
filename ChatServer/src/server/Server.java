@@ -24,7 +24,6 @@ public class Server extends Thread {
 
     public Server(int port) throws IOException {
         this.port = port;
-
         serverSocket = new ServerSocket(this.port);
     }
 
