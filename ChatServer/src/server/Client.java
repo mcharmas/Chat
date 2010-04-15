@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package server;
 
 import packet.Msg;
@@ -21,11 +20,11 @@ import server.UserListener.Status;
  */
 public class Client extends Thread {
 
-    private Socket clientSocket=null;
-    private String username=null;
-    private ObjectInputStream inObjStr=null;
-    private ObjectOutputStream outObjStr=null;
-    private UserListener listener=null;
+    private Socket clientSocket = null;
+    private String username = null;
+    private ObjectInputStream inObjStr = null;
+    private ObjectOutputStream outObjStr = null;
+    private UserListener listener = null;
 
     public Client(Socket client) {
         this.clientSocket = client;
@@ -40,7 +39,7 @@ public class Client extends Thread {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error closing socket", ex1);
             }
         }
-        Logger.getLogger(Client.class.getName()).log(Level.INFO, "Client created.");        
+        Logger.getLogger(Client.class.getName()).log(Level.INFO, "Client created.");
     }
 
     @Override
@@ -49,12 +48,12 @@ public class Client extends Thread {
             Msg m = null;
             while ((m = (Msg) inObjStr.readObject()) != null) {
                 Logger.getLogger(Client.class.getName()).log(Level.INFO, "Got data.");
-                if(m.getLogin()) {
+                if (m.getLogin()) {
                     username = m.getFrom();
                     notifyLogin(Status.LoggedIn);
-                    Logger.getLogger(Client.class.getName()).log(Level.INFO, "Client logged in: "+username);
+                    Logger.getLogger(Client.class.getName()).log(Level.INFO, "Client logged in: " + username);
                 } else {
-                    Logger.getLogger(Client.class.getName()).log(Level.INFO, "Received message from: "+username);
+                    Logger.getLogger(Client.class.getName()).log(Level.INFO, "Received message from: " + username);
                     notifyMessage(m);
                 }
             }
@@ -62,7 +61,7 @@ public class Client extends Thread {
         } catch (EOFException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.INFO, "Socket closed by other side.");
         } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error reading socket.", ex);
+            Logger.getLogger(Client.class.getName()).log(Level.INFO, "Socket Killed.");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error loading packet class.", ex);
         } finally {
@@ -75,6 +74,17 @@ public class Client extends Thread {
             } catch (IOException ex) {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error closing socket.", ex);
             }
+        }
+    }
+
+    public void disconnect() {
+        try {
+            outObjStr.close();
+            inObjStr.close();
+            clientSocket.close();
+            notifyLogin(Status.LoggedOut);
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error disconnecting client.", ex);
         }
     }
 
@@ -92,13 +102,13 @@ public class Client extends Thread {
     }
 
     private void notifyLogin(Status status) {
-        if(this.listener!=null) {
+        if (this.listener != null) {
             this.listener.userStatusChanged(status, this);
         }
     }
 
     private void notifyMessage(Msg message) {
-        if(this.listener!=null) {
+        if (this.listener != null) {
             this.listener.userSendMessage(message);
         }
     }
@@ -106,5 +116,4 @@ public class Client extends Thread {
     public String getUsername() {
         return username;
     }
-
 }

@@ -5,11 +5,8 @@
 
 package chatserver;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import gui.ServerConfig;
 import javax.swing.JFrame;
-import server.Server;
 
 /**
  *
@@ -19,11 +16,11 @@ public class Main {
 
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("Chat Client");
+        JFrame frame = new JFrame("Chat Server");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-        //frame.getContentPane().add(cp);
+        ServerConfig sc = new ServerConfig();
+        frame.getContentPane().add(sc);
 
         //Display the window.
         frame.pack();
@@ -33,11 +30,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-            Server s = new Server(9999);
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        createAndShowGUI();
     }
     
 
