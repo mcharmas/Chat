@@ -5,10 +5,8 @@
 
 package chatclient;
 
-import client.Client;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import gui.ChatPanel;
+import javax.swing.JFrame;
 
 /**
  *
@@ -16,20 +14,21 @@ import java.util.logging.Logger;
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
+    private static void createAndShowGUI() {
+        //Create and set up the window.
+        JFrame frame = new JFrame("Chat Client");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        ChatPanel cp = new ChatPanel();
+        frame.getContentPane().add(cp);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     public static void main(String[] args) {
-        try {
-            Client c = new Client("127.0.0.1", 9999, "DUPA");
-            c.start();            
-            c.sendMessage("DUPA!");
-            c.join();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        createAndShowGUI();
     }
 
 

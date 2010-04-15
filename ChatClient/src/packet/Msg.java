@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package server;
+package packet;
 
 import java.io.Serializable;
 import java.util.ArrayList;

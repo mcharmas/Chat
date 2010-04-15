@@ -8,6 +8,7 @@ package chatserver;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import server.Server;
 
 /**
@@ -16,6 +17,18 @@ import server.Server;
  */
 public class Main {
 
+    private static void createAndShowGUI() {
+        //Create and set up the window.
+        JFrame frame = new JFrame("Chat Client");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        //frame.getContentPane().add(cp);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
