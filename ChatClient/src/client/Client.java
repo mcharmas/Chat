@@ -5,16 +5,14 @@
 
 package client;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import server.Msg;
 
 /**
  *
@@ -28,8 +26,8 @@ public class Client extends Thread {
 
     public Client(String addr, int port, String username) throws IOException {
         socket = new Socket(addr, port);
-        //inObjStr = new ObjectInputStream(socket.getInputStream());
-        //outObjStr = new ObjectOutputStream(socket.getOutputStream());
+        outObjStr = new ObjectOutputStream(socket.getOutputStream());
+        inObjStr = new ObjectInputStream(socket.getInputStream());
 
         this.username = username;
         Logger.getLogger(Client.class.getName()).log(Level.INFO, "Client connected.");
@@ -37,11 +35,17 @@ public class Client extends Thread {
 
     @Override
     public void run() {
-        Msg m = new Msg(Boolean.FALSE, Boolean.FALSE);
-        m.setMessage("DUPA");
+        Msg msg = null;
+        try {
+            msg = (Msg) inObjStr.readObject();
+            System.out.println(msg.getLogin());
+            outObjStr.close();
+            inObjStr.close();
+            socket.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
-    public void sendMessage(String message) throws IOException {
-    }
-    
 }

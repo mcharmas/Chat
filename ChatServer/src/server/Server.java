@@ -8,7 +8,6 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,11 +19,12 @@ public class Server extends Thread {
 
     int port = 0;
     private ServerSocket serverSocket = null;
-    private ArrayList<Client> clients = new ArrayList<Client>();
+
 
     public Server(int port) throws IOException {
         this.port = port;
         serverSocket = new ServerSocket(this.port);
+        this.start();
     }
 
     @Override
@@ -34,17 +34,10 @@ public class Server extends Thread {
             try {
                 Socket clientSock = serverSocket.accept();
                 Client c = new Client(clientSock);
-                c.start();
-                clients.add(c);
+                Logger.getLogger(Server.class.getName()).log(Level.INFO, "Accepted client connection.");
             } catch (IOException ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, "Error client connection.", ex);
             }
         }
     }
-
-
-
-
-
-
 }

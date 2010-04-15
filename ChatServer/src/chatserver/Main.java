@@ -22,7 +22,6 @@ public class Main {
     public static void main(String[] args) {
         try {
             Server s = new Server(9999);
-            s.start();
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
