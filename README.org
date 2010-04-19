@@ -57,31 +57,6 @@
    |----------+---------+------------+-----------------|
    | Szymon   | wszyscy | brak       | wszystko        |
 
-** Protocol
-   Implementacja protokołu zarówno dla klienta jak i serwera.
-
-   | Opiekun: | + | Zależy od:   | Wymagane przez: |
-   |----------+---+--------------+-----------------|
-   | Michał   |   | Definitions, | Server,         |
-   |          |   | State        | Client          |
-
-** Storage
-   - serializowanie i zapis stanu gry.
-   - przywracanie
-
-   | Opiekun: | + | Zależy od:   | Wymagane przez: |
-   |----------+---+--------------+-----------------|
-   | Paweł    |   | Definitions, | Server          |
-   |          |   | State        |                 |
-
-** Judge
-   Implementacja zasad gry, na wejściu otrzymujemy State, na wyjściu
-   nowy State.
-
-   | Opiekun: | + | Zależy od:   | Wymagane przez: |
-   |----------+---+--------------+-----------------|
-   | Łukasz   |   | Definitions, | Server          |
-   |          |   | State        |                 |
 
 ** State
    Format zapisu stanu gry.
@@ -92,6 +67,34 @@
    |          |   |             | Client          |
    |          |   |             | Judge           |
    |          |   |             | Storage         |
+
+** Protocol
+   Implementacja protokołu zarówno dla klienta jak i serwera.
+
+   | Opiekun: | + | Zależy od:   | Wymagane przez: |
+   |----------+---+--------------+-----------------|
+   | Michał   |   | Definitions, | Server,         |
+   |          |   | State        | Client          |
+
+
+** Judge
+   Implementacja zasad gry, na wejściu otrzymujemy State, na wyjściu
+   nowy State.
+
+   | Opiekun: | + | Zależy od:   | Wymagane przez: |
+   |----------+---+--------------+-----------------|
+   | Łukasz   |   | Definitions, | Server          |
+   |          |   | State        |                 |
+
+** Storage
+   - serializowanie i zapis stanu gry.
+   - przywracanie
+
+   | Opiekun: | + | Zależy od:   | Wymagane przez: |
+   |----------+---+--------------+-----------------|
+   | Paweł    |   | Definitions, | Server          |
+   |          |   | State        |                 |
+
 
 * Ten plik
   Został stworzony w org-mode w Emacsie, ale składnia jest tak oczywista, 
