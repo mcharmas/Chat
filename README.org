@@ -1,0 +1,32 @@
+* Za co grozi śmierć?
+  - Za dodanie prywatnych ustawień projektu (katalog _private_ wew.
+    katalogu projektu)
+  - za złorzeczenie Królowej.
+
+* Technicznie
+  - Używamy *NetBeansa 6.7.1*, bo 6.8 nie wprowadza istotnych zmian
+    a przecież kochamy plugin do UML-a ;)
+  - Ewentualnie można pisać w dowolnym edytorze i kompilować antem.
+  - Gita, na Windowsie [[http://code.google.com/p/msysgit/][msysgita]].
+  - Do zabawy z kluczami na Windowsie polecam putty (pageant)
+  - Olewamy zoho, github ma coś takiego jak [[http://github.com/santamon/School-Hearts/issues][issues]] i spróbujemy działać
+    na tym.
+
+* Strategia
+  Póki co taki pomysł:
+  - każdy pracuje w swoim forku, wrzuca do mojego mastera tylko sprawne
+    i _przetestowane_ komponenty, może najlepiej z plikiem *jar*?
+    (może "oficjalne" jary pójdą do katalogu Lib ?)
+  - master nie służy też do pisania czegoś w dwie osoby i synchronizacji
+    na bieżąco.
+    Do tego git jest systemem rozproszonym, żeby takie akcje robić poza
+    masterem :P
+  - problemy z mergowaniem z masterem zostawcie Szymonowi ;)
+
+* Ten plik
+  Został stworzony w org-mode w Emacsie, ale składnia jest tak oczywista, 
+  że możecie to edytować sami, niech będzie powiedzmy tablicą ogłoszeń.
+  Utrzymujcie jakąś stałą szerokość wiersza.
+  
+  Poszczególne punkty można naturalnie komentować tylko z podpisami,
+  a do bardziej wylewnych form służy wiki.
