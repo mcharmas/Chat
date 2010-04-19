@@ -23,6 +23,99 @@
     masterem :P
   - problemy z mergowaniem z masterem zostawcie Szymonowi ;)
 
+* Projekty Hearts*
+** Server
+   Mega serwer w Javie
+
+   | Opiekun:        | Michał       |
+   |-----------------+--------------|
+   | Dodatkowo:      | Paweł        |
+   |-----------------+--------------|
+   | Zależy od:      | Definitions, |
+   |                 | Judge,       |
+   |                 | Protocol,    |
+   |                 | Storage,     |
+   |                 | State        |
+   |-----------------+--------------|
+   | Wymagane przez: | brak         |
+
+** Client  
+   Piękny klient w Swingu.
+
+   | Opiekun:        | Szymon       |
+   |-----------------+--------------|
+   | Dodatkowo:      | chętni?      |
+   |-----------------+--------------|
+   | Zależy od:      | Definitions, |
+   |                 | Protocol,    |
+   |                 | State        |
+   |-----------------+--------------|
+   | Wymagane przez: | brak         |
+
+** Definitions
+   Definicje wszystkich interfejsów gry, centralne miejsce na projektowanie
+   i dokumentację. Dokumentujemy tutaj teoretyczne działanie klas i metod,
+   szczegóły dot. implementacji powinny być udokumentowane tam.
+
+   Interfejsy można dodawać po zaimplementowaniu ale może to być
+   trudniejsze w realizacji (rozdzielenie co się nadaje do interfejsu
+   a co jest czysto implementacyjne).
+   
+   | Opiekun:        | Szymon                                    |
+   |-----------------+-------------------------------------------|
+   | Dodatkowo:      | każdy może dodawać,                       |
+   |                 | ale najlepiej przedyskutować to wcześniej |
+   |-----------------+-------------------------------------------|
+   | Zależy od:      | brak                                      |
+   |-----------------+-------------------------------------------|
+   | Wymagane przez: | Wszystko                                  |
+
+** Protocol
+   Implementacja protokołu zarówno dla klienta jak i serwera.
+   
+   | Opiekun:        | Michał       |
+   |-----------------+--------------|
+   | Zależy od:      | Definitions, |
+   |                 | State        |
+   |-----------------+--------------|
+   | Wymagane przez: | Server,      |
+   |                 | Client.      |
+
+** Storage
+   - serializowanie i zapis stanu gry.
+   - przywracanie
+
+   | Opiekun:        | Paweł        |
+   |-----------------+--------------|
+   | Zależy od:      | Definitions, |
+   |                 | State        |
+   |-----------------+--------------|
+   | Wymagane przez: | Server       |
+
+** Judge
+   Implementacja zasad gry, na wejściu otrzymujemy State, na wyjściu
+   nowy State.
+
+   | Opiekun:        | Łukasz       |
+   |-----------------+--------------|
+   | Zależy od:      | Definitions, |
+   |                 | State        |
+   |-----------------+--------------|
+   | Wymagane przez: | Server       | 
+
+** State
+   Format zapisu stanu gry.
+
+   | Opiekun:        | Szymon      |
+   |-----------------+-------------|
+   | Zależy od:      | Definitions |
+   |-----------------+-------------|
+   | Wymagane przez: | Server,     |
+   |                 | Client,     |
+   |                 | Judge,      |
+   |                 | Storage     |
+   
+
 * Ten plik
   Został stworzony w org-mode w Emacsie, ale składnia jest tak oczywista, 
   że możecie to edytować sami, niech będzie powiedzmy tablicą ogłoszeń.
