@@ -1,5 +1,5 @@
 * Za co grozi śmierć?
-  - Za dodanie prywatnych ustawień projektu (katalog _private_ wew.
+  - Za dodanie prywatnych ustawień projektu (katalog *private* wew.
     katalogu projektu)
   - za złorzeczenie Królowej.
 
@@ -15,7 +15,7 @@
 * Strategia
   Póki co taki pomysł:
   - każdy pracuje w swoim forku, wrzuca do mojego mastera tylko sprawne
-    i _przetestowane_ komponenty, może najlepiej z plikiem *jar*?
+    i *przetestowane* komponenty, może najlepiej z plikiem *jar*?
     (może "oficjalne" jary pójdą do katalogu Lib ?)
   - master nie służy też do pisania czegoś w dwie osoby i synchronizacji
     na bieżąco.
@@ -23,7 +23,7 @@
     masterem :P
   - problemy z mergowaniem z masterem zostawcie Szymonowi ;)
 
-* Projekty Hearts*
+* Projekty Hearts ___
 ** Server
    Mega serwer w Javie
 
