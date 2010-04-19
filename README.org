@@ -29,10 +29,10 @@
 
    | Opiekun: | +     | Zależy od:   | Wymagane przez: |
    |----------+-------+--------------+-----------------|
-   | Michał   | Paweł | Definitions, | brak            |
-   |          |       | Judge,       |                 |
-   |          |       | Protocol,    |                 |
-   |          |       | Storage,     |                 |
+   | Michał   | Paweł | Definitions  | brak            |
+   |          |       | Judge        |                 |
+   |          |       | Protocol     |                 |
+   |          |       | Storage      |                 |
    |          |       | State        |                 |
 
 ** Client  
@@ -40,8 +40,8 @@
 
    | Opiekun: | + | Zależy od:   | Wymagane przez: |
    |----------+---+--------------+-----------------|
-   | Szymon   |   | Definitions, | brak            |
-   |          |   | Protocol,    |                 |
+   | Szymon   |   | Definitions  | brak            |
+   |          |   | Protocol     |                 |
    |          |   | State        |                 |
 
 ** Definitions
@@ -65,35 +65,31 @@
    |----------+---+-------------+-----------------|
    | Szymon   |   | Definitions | Server          |
    |          |   |             | Client          |
-   |          |   |             | Judge           |
-   |          |   |             | Storage         |
 
 ** Protocol
    Implementacja protokołu zarówno dla klienta jak i serwera.
 
    | Opiekun: | + | Zależy od:   | Wymagane przez: |
    |----------+---+--------------+-----------------|
-   | Michał   |   | Definitions, | Server,         |
-   |          |   | State        | Client          |
+   | Michał   |   | Definitions  | Server          |
+   |          |   |              | Client          |
 
 
 ** Judge
    Implementacja zasad gry, na wejściu otrzymujemy State, na wyjściu
    nowy State.
 
-   | Opiekun: | + | Zależy od:   | Wymagane przez: |
-   |----------+---+--------------+-----------------|
-   | Łukasz   |   | Definitions, | Server          |
-   |          |   | State        |                 |
+   | Opiekun: | + | Zależy od:  | Wymagane przez: |
+   |----------+---+-------------+-----------------|
+   | Łukasz   |   | Definitions | Server          |
 
 ** Storage
    - serializowanie i zapis stanu gry.
    - przywracanie
 
-   | Opiekun: | + | Zależy od:   | Wymagane przez: |
-   |----------+---+--------------+-----------------|
-   | Paweł    |   | Definitions, | Server          |
-   |          |   | State        |                 |
+   | Opiekun: | + | Zależy od:  | Wymagane przez: |
+   |----------+---+-------------+-----------------|
+   | Paweł    |   | Definitions | Server          |
 
 
 * Ten plik
