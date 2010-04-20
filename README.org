@@ -13,10 +13,10 @@
     na tym.
 
 * Strategia
-  Póki co taki pomysł:
   - każdy pracuje w swoim forku, wrzuca do mojego mastera tylko sprawne
     i *przetestowane* komponenty, może najlepiej z plikiem *jar*?
     (może "oficjalne" jary pójdą do katalogu Lib ?)
+  - nazwy funkcji i klas po ang. komentarze, commity i dokumentacja po PL
   - master nie służy też do pisania czegoś w dwie osoby i synchronizacji
     na bieżąco.
     Do tego git jest systemem rozproszonym, żeby takie akcje robić poza
@@ -24,25 +24,26 @@
   - problemy z mergowaniem z masterem zostawcie Szymonowi ;)
 
 * Projekty Hearts ___
+  Opisy projektów są trochę nieaktualne, przydziały jak najbardziej ;)
 ** Server
    Mega serwer w Javie
 
-   | Opiekun: | +     | Zależy od:   | Wymagane przez: |
-   |----------+-------+--------------+-----------------|
-   | Michał   | Paweł | Definitions  | brak            |
-   |          |       | Judge        |                 |
-   |          |       | Protocol     |                 |
-   |          |       | Storage      |                 |
-   |          |       | State        |                 |
+   | Opiekun: | + | Zależy od:  | Wymagane przez: |
+   |----------+---+-------------+-----------------|
+   | Michał   |   | Definitions | brak            |
+   |          |   | Judge       |                 |
+   |          |   | Protocol    |                 |
+   |          |   | Storage     |                 |
+   |          |   | State       |                 |
 
 ** Client  
    Piękny klient w Swingu.
 
-   | Opiekun: | + | Zależy od:   | Wymagane przez: |
-   |----------+---+--------------+-----------------|
-   | Szymon   |   | Definitions  | brak            |
-   |          |   | Protocol     |                 |
-   |          |   | State        |                 |
+   | Opiekun: | + | Zależy od:  | Wymagane przez: |
+   |----------+---+-------------+-----------------|
+   | Szymon   |   | Definitions | brak            |
+   |          |   | Protocol    |                 |
+   |          |   | State       |                 |
 
 ** Definitions
    Definicje wszystkich interfejsów gry, centralne miejsce na projektowanie
@@ -61,29 +62,30 @@
 ** State
    Format zapisu stanu gry.
 
-   | Opiekun: | + | Zależy od:  | Wymagane przez: |
-   |----------+---+-------------+-----------------|
-   | Szymon   |   | Definitions | Server          |
-   |          |   |             | Client          |
+   | Opiekun: | +      | Zależy od:  | Wymagane przez: | Implementuje:         |
+   |----------+--------+-------------+-----------------+-----------------------|
+   | Paweł    | Łukasz | Definitions | Server          | hearts.defs.state.*   |
+   |          | Szymon |             | Client          | hearts.defs.actions.* |
 
 ** Protocol
    Implementacja protokołu zarówno dla klienta jak i serwera.
 
-   | Opiekun: | + | Zależy od:   | Wymagane przez: |
-   |----------+---+--------------+-----------------|
-   | Michał   |   | Definitions  | Server          |
-   |          |   |              | Client          |
+   | Opiekun: | +      | Zależy od:  | Wymagane przez: |
+   |----------+--------+-------------+-----------------|
+   | Michał   | Szymon | Definitions | Server          |
+   |          |        |             | Client          |
 
 
 ** Judge
-   Implementacja zasad gry, na wejściu otrzymujemy State, na wyjściu
-   nowy State.
+   Implementacja zasad gry, na wejściu otrzymujemy State i akcję,
+   na wyjściu nowy State.
 
-   | Opiekun: | + | Zależy od:  | Wymagane przez: |
-   |----------+---+-------------+-----------------|
-   | Łukasz   |   | Definitions | Server          |
+   | Opiekun: | + | Zależy od:  | Wymagane przez: | Implementuje:     |
+   |----------+---+-------------+-----------------+-------------------|
+   | Łukasz   |   | Definitions | Server          | hearts.defs.judge |
 
 ** Storage
+   *zostanie skasowane prawdopodobnie*
    - serializowanie i zapis stanu gry.
    - przywracanie
 
