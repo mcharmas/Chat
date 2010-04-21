@@ -12,7 +12,6 @@ package gui;
 
 import client.Client;
 import client.ClientListener;
-import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import packet.Msg;
@@ -28,7 +27,7 @@ public class ChatPanel extends javax.swing.JPanel implements ClientListener {
 
     /** Creates new form ConnectionPanel */
     public ChatPanel() {
-        initComponents();
+        initComponents();        
         connectionPanel1.setParent(this);
     }
 
@@ -71,7 +70,9 @@ public class ChatPanel extends javax.swing.JPanel implements ClientListener {
         });
 
         chatArea.setColumns(20);
+        chatArea.setEditable(false);
         chatArea.setRows(5);
+        chatArea.setEnabled(false);
         jScrollPane1.setViewportView(chatArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -97,7 +98,7 @@ public class ChatPanel extends javax.swing.JPanel implements ClientListener {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(connectionPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                    .addComponent(connectionPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
@@ -200,6 +201,7 @@ public class ChatPanel extends javax.swing.JPanel implements ClientListener {
 
     private void setComponentsEnabled(boolean enabled) {
         jUserList.setEnabled(enabled);
+        userList.setEnabled(enabled);
         chatArea.setEnabled(enabled);
         messageTextField.setEnabled(enabled);
         sendButton.setEnabled(enabled);

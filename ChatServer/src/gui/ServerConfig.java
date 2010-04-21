@@ -264,7 +264,9 @@ public class ServerConfig extends javax.swing.JPanel implements ServerListener {
             disconnectButton.setEnabled(false);
             logArea.setEnabled(false);
             clientList.setEnabled(false);
-            ((DefaultListModel) clientList.getModel()).clear();
+            if(clientList.getModel() != null) {
+                ((DefaultListModel) clientList.getModel()).clear();
+            }
             addressTextField.setEnabled(true);
             portTextField.setEnabled(true);
             startButton.setText("Start server");
@@ -283,11 +285,15 @@ public class ServerConfig extends javax.swing.JPanel implements ServerListener {
     }
 
     public void gotMessage(Msg message) {
-        addLog(message.getFrom() + ": " + message.getMessage());
+        if(message.getTo()!=null) {
+            addLog("[P]["+message.getFrom()+"]to["+message.getTo()+"]: "+ message.getMessage());
+        } else {
+            addLog(message.getFrom() + ": " + message.getMessage());
+        }
     }
 
     private void addLog(String log) {
-        logArea.append(log+"\n");
-        logArea.moveCaretPosition(logArea.getText().length() - 1);
+        logArea.append("\n"+log);
+        logArea.setCaretPosition(logArea.getText().length() - 1);
     }
 }
