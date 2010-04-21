@@ -18,7 +18,7 @@ public interface UserSocket extends ObjectSocket {
     public void setId(int id);
 
     /**
-     * Ustawia na
+     * Ustawia nazwę
      * @param name
      */
     public void setName(String name);

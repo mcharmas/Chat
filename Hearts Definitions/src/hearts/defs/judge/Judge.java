@@ -5,7 +5,8 @@ import hearts.defs.state.GameStateException;
 import hearts.defs.actions.Action;
 
 /**
- * Klasa
+ * Klasa decydująca o tym, czy podaną akcję na podanym stanie gry można wykonać
+ *
  * @author szymon
  */
 public interface Judge {
@@ -15,10 +16,6 @@ public interface Judge {
      *
      * <p>Potem sam podejmuje ew. akcje i dodaje swoje komunikaty do kolejki
      * w stanie gry przez state.addAction();</p>
-     *
-     * <p>Specjalną troską powinien opatrzyć akcje dziedziczące po ChatAction:
-     * podawać jej odrębny stan gry, jakiś DumbState implementujący tylko
-     * kolejkę akcji do rozesłania.</p>
      *
      * @param state aktualny stan gry
      * @param action akcja do rozpatrzenia
