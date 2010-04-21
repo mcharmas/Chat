@@ -1,7 +1,14 @@
-* Za co grozi śmierć?
-  - Za dodanie prywatnych ustawień projektu (katalog *private* wew.
-    katalogu projektu)
-  - za złorzeczenie Królowej.
+* Propozycja: używanie grup w NetBeans
+  Żeby trzymać wszystkie projekty na raz otwarte oddzielnie od
+  reszty zajęć fajnie jest sobie utworzyć grupę.
+
+  1. Klikejszon File -> Project Group -> New Group...
+  2. tam wybieramy "Folder of Projects" i wybieramy folder
+     z projektami
+  3. :)
+
+  Polecam też wygenerować sobie javadoca z Definitions i czytanie
+  tam dokumentacji.
 
 * Technicznie
   - Używamy *NetBeansa 6.7.1*, bo 6.8 nie wprowadza istotnych zmian
@@ -28,8 +35,6 @@
 
   Kolumna "Implementuje" mówi, że implementuje np. hearts.defs.state.*
   jako hearts.state.*
-
-** TODO skasować Storage i Judge
 
 ** Server
    Mega serwer w Javie, agreguje implementację protokołu i stanu, ma
@@ -63,10 +68,6 @@
    |----------+---------+------------+-----------------|
    | Szymon   | wszyscy | brak       | wszystko        |
 
-** TODO dodać interfejsy
-   - hearts.defs.client.ServerSocket
-   - hearts.defs.actions.{Server,Client,GUI,Error}Action
-   - przenieść UserSocket do hearts.defs.protocol i utworzyć tam ServerSocket
 
 ** State
    Zapis stanu gry, wszystkie akcje, sędzia (sprawdza czy można wykonać akcję).

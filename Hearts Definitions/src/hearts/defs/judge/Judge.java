@@ -10,11 +10,16 @@ import hearts.defs.actions.Action;
  */
 public interface Judge {
     /**
-     * Dostaje stan gry i akcję, na podstawie typu akcji ocenia, czy akcja
-     * jest w tym momencie dozwolona i wywołuje na akcji perform();
+     * <p>Dostaje stan gry i akcję, na podstawie typu akcji ocenia, czy akcja
+     * jest w tym momencie dozwolona i wywołuje na akcji perform();</p>
      *
-     * Potem sam podejmuje ew. akcje i dodaje swoje komunikaty do kolejki
-     * w stanie gry przez state.addAction();
+     * <p>Potem sam podejmuje ew. akcje i dodaje swoje komunikaty do kolejki
+     * w stanie gry przez state.addAction();</p>
+     *
+     * <p>Specjalną troską powinien opatrzyć akcje dziedziczące po ChatAction:
+     * podawać jej odrębny stan gry, jakiś DumbState implementujący tylko
+     * kolejkę akcji do rozesłania.</p>
+     *
      * @param state aktualny stan gry
      * @param action akcja do rozpatrzenia
      * @return nowy stan gry
