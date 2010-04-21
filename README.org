@@ -25,16 +25,21 @@
 
 * Projekty Hearts ___
   Opisy projektów są trochę nieaktualne, przydziały jak najbardziej ;)
-** Server
-   Mega serwer w Javie
 
-   | Opiekun: | + | Zależy od:  | Wymagane przez: |
-   |----------+---+-------------+-----------------|
-   | Michał   |   | Definitions | brak            |
-   |          |   | Judge       |                 |
-   |          |   | Protocol    |                 |
-   |          |   | Storage     |                 |
-   |          |   | State       |                 |
+  Kolumna "Implementuje" mówi, że implementuje np. hearts.defs.state.*
+  jako hearts.state.*
+
+** TODO skasować Storage i Judge
+
+** Server
+   Mega serwer w Javie, agreguje implementację protokołu i stanu, ma
+   własnego StateGuarda
+
+   | Opiekun: | + | Zależy od:  | Wymagane przez: | Implementuje:       |
+   |----------+---+-------------+-----------------+---------------------|
+   | Michał   |   | Definitions | brak            | hearts.def.server.* |
+   |          |   | Protocol    |                 |                     |
+   |          |   | State       |                 |                     |
 
 ** Client  
    Piękny klient w Swingu.
@@ -58,42 +63,36 @@
    |----------+---------+------------+-----------------|
    | Szymon   | wszyscy | brak       | wszystko        |
 
+** TODO dodać interfejsy
+   - hearts.defs.client.ServerSocket
+   - hearts.defs.actions.{Server,Client,GUI,Error}Action
+   - przenieść UserSocket do hearts.defs.protocol i utworzyć tam ServerSocket
 
 ** State
-   Format zapisu stanu gry.
+   Zapis stanu gry, wszystkie akcje, sędzia (sprawdza czy można wykonać akcję).
+   - Łukasz:
+     - implementacja akcji serwera,
+     - zaślepki wynikających z akcji serwera akcji klienta;
+   - Paweł:
+     - implementacja akcji klienta,
+     - zaślepki akcji GUI;
+   - Szymon:
+     - implementacja akcji GUI.
 
    | Opiekun: | +      | Zależy od:  | Wymagane przez: | Implementuje:         |
    |----------+--------+-------------+-----------------+-----------------------|
    | Paweł    | Łukasz | Definitions | Server          | hearts.defs.state.*   |
    |          | Szymon |             | Client          | hearts.defs.actions.* |
+   |          |        |             |                 | hearts.defs.judge.*   |
 
 ** Protocol
    Implementacja protokołu zarówno dla klienta jak i serwera.
 
-   | Opiekun: | +      | Zależy od:  | Wymagane przez: |
-   |----------+--------+-------------+-----------------|
-   | Michał   | Szymon | Definitions | Server          |
-   |          |        |             | Client          |
-
-
-** Judge
-   Implementacja zasad gry, na wejściu otrzymujemy State i akcję,
-   na wyjściu nowy State.
-
-   | Opiekun: | + | Zależy od:  | Wymagane przez: | Implementuje:     |
-   |----------+---+-------------+-----------------+-------------------|
-   | Łukasz   |   | Definitions | Server          | hearts.defs.judge |
-
-** Storage
-   *zostanie skasowane prawdopodobnie*
-   - serializowanie i zapis stanu gry.
-   - przywracanie
-
-   | Opiekun: | + | Zależy od:  | Wymagane przez: |
-   |----------+---+-------------+-----------------|
-   | Paweł    |   | Definitions | Server          |
-
-
+   | Opiekun: | +      | Zależy od:  | Wymagane przez: | Implementuje:          |
+   |----------+--------+-------------+-----------------+------------------------|
+   | Michał   | Szymon | Definitions | Server          | hearts.defs.protocol.* |
+   |          |        |             | Client          |                        |
+     
 * Ten plik
   Został stworzony w org-mode w Emacsie, ale składnia jest tak oczywista, 
   że możecie to edytować sami, niech będzie powiedzmy tablicą ogłoszeń.
