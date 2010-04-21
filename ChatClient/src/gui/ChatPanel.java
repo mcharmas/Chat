@@ -8,11 +8,11 @@
  *
  * Created on 2010-04-12, 23:46:10
  */
-
 package gui;
 
 import client.Client;
 import client.ClientListener;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import packet.Msg;
@@ -21,12 +21,13 @@ import packet.Msg;
  *
  * @author orbit
  */
-public class ChatPanel extends javax.swing.JPanel implements ClientListener{
+public class ChatPanel extends javax.swing.JPanel implements ClientListener {
 
-    Client client=null;
+    Client client = null;
     ArrayList<String> clientList = new ArrayList<String>();
+
     /** Creates new form ConnectionPanel */
-    public ChatPanel() {                
+    public ChatPanel() {
         initComponents();
         connectionPanel1.setParent(this);
     }
@@ -112,22 +113,46 @@ public class ChatPanel extends javax.swing.JPanel implements ClientListener{
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        if(!messageTextField.getText().equals("")) {
-            Msg message = new Msg(Boolean.FALSE, Boolean.FALSE);
-            message.setFrom(client.getUsername());
-            message.setMessage(messageTextField.getText());
-            client.sendMessage(message);
-            messageTextField.setText("");
+        if (!messageTextField.getText().equals("")) {
+            if (messageTextField.getText().startsWith("/msg ")) {
+                Msg message = new Msg(Boolean.FALSE, Boolean.FALSE);
+                String toSend = messageTextField.getText();
+                String[] list = toSend.split(" ");
+                if (list.length >= 2) {
+                    if (client.getUsername().equals(list[1])) {
+                        chatArea.append("\nYou can't send private message to yourself!");
+                        chatArea.setCaretPosition(chatArea.getText().length() - 1);
+                    } else if (userConnected(list[1])) {
+                        message.setTo(list[1]);
+                        message.setFrom(client.getUsername());
+                        String msgStr = "";
+                        for (int i = 2; i < list.length; i++) {
+                            msgStr += " " + list[i];
+                        }
+                        message.setMessage(msgStr);
+                        client.sendMessage(message);
+                        messageTextField.setText("");
+                        gotMessage(message);
+                    } else {
+                        chatArea.append("\nNo such user: " + list[1]);
+                        chatArea.setCaretPosition(chatArea.getText().length() - 1);
+                    }
+                }
+            } else {
+                Msg message = new Msg(Boolean.FALSE, Boolean.FALSE);
+                message.setFrom(client.getUsername());
+                message.setMessage(messageTextField.getText());
+                client.sendMessage(message);
+                messageTextField.setText("");
+            }
         }
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void messageTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_messageTextFieldKeyPressed
-        if (evt.getKeyChar()=='\n') {
+        if (evt.getKeyChar() == '\n') {
             sendButtonActionPerformed(null);
         }
     }//GEN-LAST:event_messageTextFieldKeyPressed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea chatArea;
     private gui.ConnectionPanel connectionPanel1;
@@ -139,21 +164,28 @@ public class ChatPanel extends javax.swing.JPanel implements ClientListener{
     private javax.swing.JScrollPane userList;
     // End of variables declaration//GEN-END:variables
 
-    public void gotMessage(Msg message) {        
-        chatArea.append("\n" + message.getFrom() + ": " + message.getMessage());
-        chatArea.setCaretPosition(chatArea.getText().length()-1);
+    public void gotMessage(Msg message) {
+        String msg = "";
+        if (message.getTo() != null) {
+            msg = "\n[P] " + message.getFrom() + ": " + message.getMessage();
+        } else {
+            msg = "\n" + message.getFrom() + ": " + message.getMessage();
+        }
+        chatArea.append(msg);
+        chatArea.setCaretPosition(chatArea.getText().length() - 1);
     }
 
     public void gotUserList(ArrayList<String> userList) {
         DefaultListModel model = new DefaultListModel();
-        for(String c: userList) {
+        for (String c : userList) {
             model.addElement(c);
         }
         jUserList.setModel(model);
+        clientList = userList;
     }
 
     public void connectionStateChanged(State state) {
-        if(state == State.CONNECTED) {
+        if (state == State.CONNECTED) {
             client = connectionPanel1.getClient();
             setComponentsEnabled(true);
             connectionPanel1.setInputEnbaled(false);
@@ -161,7 +193,7 @@ public class ChatPanel extends javax.swing.JPanel implements ClientListener{
             client = null;
             setComponentsEnabled(false);
             connectionPanel1.setInputEnbaled(true);
-            ((DefaultListModel)jUserList.getModel()).clear();
+            ((DefaultListModel) jUserList.getModel()).clear();
             connectionPanel1.setConnected(false);
         }
     }
@@ -173,4 +205,13 @@ public class ChatPanel extends javax.swing.JPanel implements ClientListener{
         sendButton.setEnabled(enabled);
     }
 
+    private boolean userConnected(String user) {
+        for (String s : clientList) {
+            System.out.println(user + " " + s);
+            if (s.equals(user)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
