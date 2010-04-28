@@ -121,11 +121,7 @@ public class Server extends Thread implements UserListener {
     }
 
     private void sendPrivateMessage(Msg message) {
-        for (Client c : clients) {
-            if (c.getUsername().equals(message.getTo())) {
-                c.sendMessage(message);
-            }
-        }
+        throw new NotImplementedException();
     }
 
     private void notifyGotMessage(Msg message) {

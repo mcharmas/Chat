@@ -13,6 +13,7 @@ package gui;
 import client.Client;
 import client.ClientListener;
 import java.io.IOException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -79,10 +80,6 @@ public class ConnectionPanel extends javax.swing.JPanel {
         });
 
         jLabel1.setText("Adres:");
-
-        adressField.setText("localhost");
-
-        portField.setText("9999");
 
         jLabel2.setText("Port:");
 
@@ -160,7 +157,6 @@ public class ConnectionPanel extends javax.swing.JPanel {
             connected=false;
         }
     }//GEN-LAST:event_connectButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adressField;
     private javax.swing.JButton connectButton;

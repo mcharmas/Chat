@@ -12,6 +12,8 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import packet.Msg;
@@ -113,13 +115,13 @@ public class ServerConfig extends javax.swing.JPanel implements ServerListener {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(341, Short.MAX_VALUE))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Config", jPanel1);
@@ -138,7 +140,6 @@ public class ServerConfig extends javax.swing.JPanel implements ServerListener {
         });
 
         logArea.setColumns(20);
-        logArea.setEditable(false);
         logArea.setRows(5);
         jScrollPane1.setViewportView(logArea);
 
@@ -157,7 +158,7 @@ public class ServerConfig extends javax.swing.JPanel implements ServerListener {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -178,10 +179,10 @@ public class ServerConfig extends javax.swing.JPanel implements ServerListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(disconnectButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -258,15 +259,12 @@ public class ServerConfig extends javax.swing.JPanel implements ServerListener {
             clientList.setEnabled(true);
             addressTextField.setEnabled(false);
             portTextField.setEnabled(false);
-            clientList.setModel(new DefaultListModel());
             startButton.setText("Stop server");
         } else {
             disconnectButton.setEnabled(false);
             logArea.setEnabled(false);
             clientList.setEnabled(false);
-            if(clientList.getModel() != null) {
-                ((DefaultListModel) clientList.getModel()).clear();
-            }
+            ((DefaultListModel) clientList.getModel()).clear();
             addressTextField.setEnabled(true);
             portTextField.setEnabled(true);
             startButton.setText("Start server");
@@ -285,15 +283,11 @@ public class ServerConfig extends javax.swing.JPanel implements ServerListener {
     }
 
     public void gotMessage(Msg message) {
-        if(message.getTo()!=null) {
-            addLog("[P]["+message.getFrom()+"]to["+message.getTo()+"]: "+ message.getMessage());
-        } else {
-            addLog(message.getFrom() + ": " + message.getMessage());
-        }
+        addLog(message.getFrom() + ": " + message.getMessage());
     }
 
     private void addLog(String log) {
-        logArea.append("\n"+log);
-        logArea.setCaretPosition(logArea.getText().length() - 1);
+        logArea.append(log+"\n");
+        logArea.moveCaretPosition(logArea.getText().length() - 1);
     }
 }

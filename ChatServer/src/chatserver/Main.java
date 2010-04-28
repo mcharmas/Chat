@@ -6,10 +6,7 @@
 package chatserver;
 
 import gui.ServerConfig;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 
 /**
  *
@@ -19,17 +16,6 @@ public class Main {
 
     private static void createAndShowGUI() {
         //Create and set up the window.
-
-        try {
-            //System.out.println(Arrays.toString(UIManager.getInstalledLookAndFeels()));
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (Exception ex) {
-            try {
-                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-            } catch (Exception ex1) {
-            }
-        }
-
         JFrame frame = new JFrame("Chat Server");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
