@@ -6,6 +6,8 @@ package hearts.server;
 
 import hearts.defs.actions.Action;
 import hearts.defs.actions.ActionListener;
+import hearts.defs.actions.ErrorAction;
+import hearts.defs.actions.GUIAction;
 import hearts.defs.protocol.UserSocket;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -81,11 +83,13 @@ public class ServerClient implements UserSocket {
     }
 
     public void actionReceived(Action a) {
-        try {
-            this.output.writeObject(a);
-            this.output.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(ServerClient.class.getName()).log(Level.SEVERE, "Bład wysyłania akcji.", ex);
+        if (a instanceof GUIAction || a instanceof ErrorAction) {
+            try {
+                this.output.writeObject(a);
+                this.output.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(ServerClient.class.getName()).log(Level.SEVERE, "Bład wysyłania akcji.", ex);
+            }
         }
     }
 
