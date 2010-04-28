@@ -81,6 +81,10 @@ public class ConnectionPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Adres:");
 
+        adressField.setText("localhost");
+
+        portField.setText("9999");
+
         jLabel2.setText("Port:");
 
         jLabel3.setText("Nick:");
