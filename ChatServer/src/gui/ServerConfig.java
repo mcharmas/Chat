@@ -288,6 +288,6 @@ public class ServerConfig extends javax.swing.JPanel implements ServerListener {
 
     private void addLog(String log) {
         logArea.append(log+"\n");
-        logArea.moveCaretPosition(logArea.getText().length() - 1);
+        logArea.setCaretPosition(logArea.getText().length() - 1);
     }
 }
